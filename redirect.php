@@ -1,21 +1,24 @@
 <?php
-$_GET['action']=isset($_GET['action']) ?  $_GET['action'] : '127.0.0.1';
+$_GET['action'] = isset($_GET['action']) ?  $_GET['action'] : '127.0.0.1';
 echo $_GET['action'];
-switch ($_GET['action']){
-    case 'startServer': startServer();
+switch ($_GET['action']) {
+    case 'startServer':
+        startServer();
         break;
-    case 'endServer':endServer();
+    case 'stopServer':
+        stopServer();
         break;
 }
-function startServer(){
+function startServer()
+{
     session_start();
     $_SESSION['ipaddress']  = $_POST['ipaddress'];
-    $_SESSION ['port'] = $_POST['port'];
+    $_SESSION['port'] = $_POST['port'];
     print_r($_SESSION['ipaddress']);
-    print_r($_SESSION ['port']);
+    print_r($_SESSION['port']);
     echo 'ok';
-
 }
-function endServer(){
-    $_SESSION['stopServer']='0';
+function stopServer()
+{
+    file_put_contents('stopServer.php', '<?php echo 0; ?>');
 }
